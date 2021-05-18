@@ -16,7 +16,6 @@ def get_filters():
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
-        (str) filter - name of the filter, which user choose to filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
@@ -94,7 +93,7 @@ def load_data(city, month, day):
     return df
 
 
-def get_time_stats(df, month, day, filter):
+def time_stats(df, month, day, filter):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
@@ -107,7 +106,7 @@ def get_time_stats(df, month, day, filter):
         print('most popular month: {}, count: {}, Filtered by: {}'.format(
             months[most_month - 1], most_month_count, filter))
 
-    # display the most common day of week if no filter
+    # display the most common day of week
     if(day == 'all'):
         most_day = df['day_of_week'].mode()[0]
         most_day_count = df['day_of_week'].value_counts().max()
@@ -128,9 +127,9 @@ def get_time_stats(df, month, day, filter):
 
 
 def station_stats(df, filter):
-    """Displays statistics on the most popular stations and combination station."""
+    """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and combination station...\n')
+    print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
     # display most commonly used start station
@@ -233,7 +232,7 @@ def main():
         city, month, day, filter = get_filters()
         df = load_data(city, month, day)
 
-        get_time_stats(df, month, day, filter)
+        time_stats(df, month, day, filter)
         station_stats(df, filter)
         trip_duration_stats(df, filter)
         raw_data = load_data(city, month, day)
@@ -241,7 +240,7 @@ def main():
         view_raw_data(raw_data, 0)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.strip().lower() != 'yes':
+        if restart.lower() != 'yes':
             break
 
 

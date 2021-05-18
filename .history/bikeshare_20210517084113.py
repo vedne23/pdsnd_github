@@ -16,7 +16,6 @@ def get_filters():
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
-        (str) filter - name of the filter, which user choose to filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
@@ -107,7 +106,7 @@ def time_stats(df, month, day, filter):
         print('most popular month: {}, count: {}, Filtered by: {}'.format(
             months[most_month - 1], most_month_count, filter))
 
-    # display the most common day of week if no filter
+    # display the most common day of week
     if(day == 'all'):
         most_day = df['day_of_week'].mode()[0]
         most_day_count = df['day_of_week'].value_counts().max()
